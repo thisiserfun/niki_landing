@@ -177,6 +177,42 @@ export const projects = [
   }
 ]
 
+export const blogPosts = [
+  {
+    id: 1,
+    title: "Building Scalable AI Systems with Django",
+    excerpt: "Learn how to integrate machine learning models with Django backend for production-ready applications.",
+    content: "Full article content here...",
+    category: "AI & Backend",
+    date: "2024-12-15",
+    readTime: "5 min read",
+    image: "/images/blog/ai-django.jpg",
+    tags: ["Django", "Machine Learning", "Python", "Backend"]
+  },
+  {
+    id: 2,
+    title: "Task Offloading in Edge Computing: A Meta-RL Approach",
+    excerpt: "Exploring how Meta Reinforcement Learning can optimize task distribution in edge networks.",
+    content: "Full article content here...",
+    category: "Research",
+    date: "2024-12-10",
+    readTime: "8 min read",
+    image: "/images/blog/edge-computing.jpg",
+    tags: ["Edge Computing", "Meta-RL", "Research", "AI"]
+  },
+  {
+    id: 3,
+    title: "Optimizing Neural Networks for Real-time Inference",
+    excerpt: "Techniques and strategies for deploying efficient AI models in production environments.",
+    content: "Full article content here...",
+    category: "AI & ML",
+    date: "2024-12-05",
+    readTime: "6 min read",
+    image: "/images/blog/neural-optimization.jpg",
+    tags: ["Neural Networks", "Optimization", "AI", "Performance"]
+  }
+]
+
 export const testimonials = [
   {
     id: 1,
