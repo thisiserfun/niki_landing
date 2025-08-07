@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies with legacy peer deps flag
-RUN npm ci --legacy-peer-deps
+RUN npm ci --legacy-peer-deps && npm install terser --save-dev
 
 # Copy source code
 COPY . .
