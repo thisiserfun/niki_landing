@@ -1,18 +1,19 @@
 # Build stage
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with legacy peer deps flag
+RUN npm ci --legacy-peer-deps
 
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application with increased memory
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN npm run build
 
 # Production stage
