@@ -1,0 +1,99 @@
+AnalyzeModelPipelineAndData:
+  # Input files (adjust paths as needed)
+  data_file: "./data.csv"
+  summary_file: "./summary.txt"
+
+  # 1. Data & Feature Dimensions
+  - task:
+      name: "DataDimensions"
+      action: >
+        1. Load the CSV from {{ data_file }}.
+        2. For each column (feature), report:
+           - Column name
+           - Data type
+           - Number of non-null entries
+        3. Report the overall data matrix shape: (num_samples, num_features).
+
+  # 2. Encoder Structure
+  - task:
+      name: "EncoderAnalysis"
+      action: >
+        1. Identify the encoder’s input tensor shape (batch_size, seq_len, input_dim).
+        2. Report key dimensions:
+           - embedding_dim
+           - hidden_dim
+        3. If positional encodings are used, describe their shape and how they are added.
+
+  # 3. Attention Module
+  - task:
+      name: "AttentionAnalysis"
+      action: >
+        1. Detect number of attention heads (n_heads).
+        2. Report shapes of Q, K, V projection weight matrices: (input_dim, head_dim) × n_heads.
+        3. Describe attention score tensor shape: (batch_size, n_heads, seq_len, seq_len).
+        4. Describe the output projection shape.
+
+  # 4. Decoder Structure
+  - task:
+      name: "DecoderAnalysis"
+      action: >
+        1. Report number of decoder layers.
+        2. For each layer, report its input and output tensor shapes.
+
+  # 5. Graph & Chain Structure (if applicable)
+  - task:
+      name: "GraphChainAnalysis"
+      action: >
+        1. Identify how many graphs or chains are present in the data.
+        2. For each graph:
+           - num_nodes
+           - num_edges
+           - average node degree
+
+  # 6. PPO Hyperparameters
+  - task:
+      name: "PPOHyperparams"
+      action: >
+        1. Extract PPO settings:
+           - Discount factor (gamma)
+           - GAE lambda
+           - Clipping epsilon (ε)
+           - Actor learning rate
+           - Critic learning rate
+           - Number of optimization epochs per update
+           - Batch size and mini‑batch size
+        2. Describe update schedule:
+           - Full-batch vs repeated epochs
+           - Gradient steps per sample
+
+  # 7. Training Loop Details
+  - task:
+      name: "TrainingLoopAnalysis"
+      action: >
+        1. Report total number of iterations and epochs.
+        2. For each epoch:
+           - Number of iterations
+           - Batch sampling strategy (e.g. random shuffle, on‑policy rollout length)
+        3. Clarify whether a full replay buffer is used, or n‑step/GAE, or another replay strategy.
+
+  # 8. Baseline (Value Network)
+  - task:
+      name: "BaselineAnalysis"
+      action: >
+        1. Describe the value network architecture:
+           - Input dimension
+           - Hidden layers and sizes
+           - Output dimension
+           - Activation functions
+        2. Explain how the baseline is computed (state‑value vs. generalized advantage).
+
+  # 9. Save Final Report
+  - task:
+      name: "SaveReport"
+      action: >
+        Combine all analyses into a structured report (JSON or YAML)
+        and write it to "./model_analysis_report.json".
+
+# Execute the pipeline and save the output:
+run_pipeline: true
+save_to_file: "./model_analysis_report.json"
